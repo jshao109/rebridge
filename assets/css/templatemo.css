@@ -213,10 +213,11 @@ a {
 }
 /* Pricing */
 .pricing-list {
+  align-items: center;
   margin-bottom: 1px;
 }
 .pricing-table {
-  max-width: 350px;
+  max-width: 500px;
   margin: auto;
 }
 .pricing-table,
