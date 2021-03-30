@@ -38,7 +38,7 @@
     
     // Display initial question
     displayNext();
-    
+
     // Click handler for the 'next' button
     $('#next').on('click', function (e) {
       e.preventDefault();
@@ -77,7 +77,6 @@
       questionCounter = 0;
       selections = [];
       displayNext();
-      $('#start').hide();
     });
     
     // Animates buttons on hover
@@ -137,21 +136,19 @@
     function displayNext() {
       quiz.fadeOut(function() {
         $('#question').remove();
-        
         if(questionCounter < questions.length){
           var nextQuestion = createQuestionElement(questionCounter);
           quiz.append(nextQuestion).fadeIn();
           if (!(isNaN(selections[questionCounter]))) {
             $('input[value='+selections[questionCounter]+']').prop('checked', true);
           }
-          
-          // Controls display of 'prev' button
           if(questionCounter === 1){
             $('#prev').show();
+            $('#talk').hide();
           } else if(questionCounter === 0){
-            
             $('#prev').hide();
             $('#next').show();
+            $('#talk').hide();
           }
         } else {
           var scoreElem = displayScore();
@@ -159,37 +156,40 @@
           $('#next').hide();
           $('#prev').hide();
           $('#start').show();
+          $('#talk').show();
         }
       });
     }
     
     // Computes score and returns a paragraph element to be displayed
     function displayScore() {
-      var score = $('<p style="font-size:20px">',{id: 'question'});
+      var score = $('<div id="question">');
       
       if (selections[1] === 2) {
         if (selections[2] === 0){
-        score.append('<b>Suggestion</b>:<br/> For your small business, you should set up a SEP IRA for you and your employees.<br/><br/>'
-        + '<b>Benefits</b>:<br/>' 
-        + '<ul><li>A SEP IRA is easy to set up and manage, and doesn’t require too much paperwork with the IRS.</li>'
-        + '<li>It offers you a much higher annual contribution limit than a traditional IRA (almost 10 times as much!) and contributions are also tax-deductible for you AND your employees.</li>'
-        + '<li>Business isn’t doing so well? Have no fear, a SEP IRA doesn’t require you to contribute every year.</li></ul>');
-      } else if (selections[2] === 2){
-        score.append('<b>Suggestion</b>:<br/> For your business, you should set up a SIMPLE IRA for you and your employees. For yourself, consider contributing to your own Roth IRA. <br/><br/>'
-        + '<b>Benefits</b>:<br/>' 
-        + '<ul><li>A SIMPLE IRA is easy to set up and manage, and allows employees to own their own accounts.</li>'
-        + '<li>As compared to your current SEP IRA, a SIMPLE IRA takes the burden of contribution off of you, allowing employees to contribute a portion of their salary to their accounts.</li>'
-        + '<li>Your current contributions to a SIMPLE IRA are tax-deductible!</li>'
-        + '<li>Based on your income and its projected growth, you should save your money in a Roth IRA to take advantage of your relatively lower tax rate now, before you go up a tax bracket. This way, when you retire, only the portion of money in your SIMPLE IRA will be taxed.</li></ul>');
-      } 
-    } else if (selections[1] === 0){
-        score.append('<b>Suggestion</b>:<br/> You should contribute to both your company-sponsored 401(k) and your own Roth IRA.<br/><br/>'
-        + '<b>Benefits</b>:<br/>' 
-        + '<ul><li>Your employer offers a company match on your 401(k), so take advantage of the free money! Contribute enough money to the account to get the maximum match.</li>'
+          score.append('<p style="font-size:20px"><b>Suggestion:</b></p> <p style="font-size:16px">For your small business, you should set up a <b>SEP IRA</b> for you and your employees.</p>'
+          + '<p style="font-size:20px"><b>Benefits</b>:</p>' 
+          + '<ul style="font-size:16px"><li>A SEP IRA is easy to set up and manage, and doesn’t require too much paperwork with the IRS.</li>'
+          + '<li>It offers you a much higher annual contribution limit than a traditional IRA (almost 10 times as much!) and contributions are also tax-deductible for you AND your employees.</li>'
+          + '<li>Business isn’t doing so well? Have no fear, a SEP IRA doesn’t require you to contribute every year.</li></ul>');
+        } else if (selections[2] === 2){
+          score.append('<p style="font-size:20px"><b>Suggestion</b>:</p> <p style="font-size:16px">For your business, you should set up a <b>SIMPLE IRA</b> for you and your employees. For yourself, consider contributing to your own <b>Roth IRA</b>.</p>'
+          + '<p style="font-size:20px"><b>Benefits</b>:</p>' 
+          + '<ul style="font-size:16px"><li>A SIMPLE IRA is easy to set up and manage, and allows employees to own their own accounts.</li>'
+          + '<li>As compared to your current SEP IRA, a SIMPLE IRA takes the burden of contribution off of you, allowing employees to contribute a portion of their salary to their accounts.</li>'
+          + '<li>Your current contributions to a SIMPLE IRA are tax-deductible!</li>'
+          + '<li>Based on your income and its projected growth, you should save your money in a Roth IRA to take advantage of your relatively lower tax rate now, before you go up a tax bracket. This way, when you retire, only the portion of money in your SIMPLE IRA will be taxed.</li></ul>');
+        } 
+      } else if (selections[1] === 0){
+        score.append('<p style="font-size:20px"><b>Suggestion</b>:</p> <p style="font-size:16px">You should contribute to both your company-sponsored <b>401(k)</b> and your own <b>Roth IRA</b>.</p>'
+        + '<p style="font-size:20px"><b>Benefits</b>:</p>' 
+        + '<ul style="font-size:16px"><li>Your employer offers a company match on your 401(k), so take advantage of the free money! Contribute enough money to the account to get the maximum match.</li>'
         + '<li>When you contribute to a Roth IRA now, you will still pay taxes on that money...but when you take it out during retirement in the future, your withdrawals will be tax-free!</li>'
         + '<li>As a young employee whose salary still has room to grow, take advantage of your lower tax rate now with a Roth IRA so you can avoid paying higher taxes when you withdraw your money later on.</li></ul>');
+      } else {
+        score.append('</p>');
       }
-      score.append('</p>');
+      score.append('</div>');
       return score;
     }
   })();
