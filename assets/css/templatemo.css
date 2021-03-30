@@ -217,7 +217,9 @@ a {
   margin-bottom: 1px;
 }
 .pricing-table {
-  max-width: 500px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1000px;
   margin: auto;
 }
 .pricing-table,
