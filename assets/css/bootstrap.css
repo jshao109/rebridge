@@ -9886,6 +9886,7 @@ fieldset:disabled .btn {
 /* line 50, src/assets/scss/mixins/_utilities.scss */
 .text-muted {
   color: #6c757d !important;
+  font-size: larger;
 }
 
 /* line 50, src/assets/scss/mixins/_utilities.scss */
