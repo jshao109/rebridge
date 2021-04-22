@@ -67,7 +67,7 @@ a {
 }
 /* Home */
 #index_banner {
-  background-image: url("./../img/asian-couple-senior-walking-beach-holding-hands-honeymoon-family-together-happiness-lifestyle-life-after-retirement-plan-life-insurance_41078-268.jpeg");
+  background-image: url("./../img/gig-workers.jpeg");
   background-position: -200 center;
   background-size: cover;
   height: 100%;
@@ -218,7 +218,7 @@ a {
 }
 .pricing-table {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   max-width: 1000px;
   margin: auto;
 }
